@@ -26,13 +26,20 @@ public class Main {
 
             //productDAO.create(new Product("Шоколад",5,103.3));
             //brandDAO.create(new Brand("Комбинат №1",1));
-            System.out.println(productDAO.findMax());
-            //System.out.println(productDAO.findByBrand(brandDAO.findBrandId("Комбинат №1").getId()));
-          /*for (var item: productDAO.findAll()) {
+            //
+            System.out.println("Show all products:");
+          for (var item: productDAO.findAll()) {
                System.out.println(item);
-           }*/
+           }
+            System.out.println("Find by cost range 100...200:");
             System.out.println(productDAO.findByCostRange(100,200));
-            //System.out.println(productDAO.findByBrandExist());
+            System.out.println("Find by brand exist:");
+            System.out.println(productDAO.findByBrandExist());
+            System.out.println("Show product with max cost:");
+            System.out.println(productDAO.findMax());
+            System.out.println("Show product with brand 'Комбинат №1':");
+            System.out.println(productDAO.findByBrand(brandDAO.findBrandId("Комбинат №1").getId()));
+
         }
     }
 }
