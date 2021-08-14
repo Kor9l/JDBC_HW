@@ -38,7 +38,7 @@ public class Main {
             System.out.println("Show product with max cost:");
             System.out.println(productDAO.findMax());
             System.out.println("Show product with brand 'Комбинат №1':");
-            System.out.println(productDAO.findByBrand(brandDAO.findBrandId("Комбинат №1").getId()));
+            System.out.println(productDAO.findByBrand("Комбинат №1"));
 
         }
     }
