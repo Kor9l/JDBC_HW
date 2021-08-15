@@ -18,7 +18,7 @@ public class ProductDAO extends AbstractDAO<Integer, Product> {
     private final static String INSERT_ENTITY = "insert into Product(title, id, cost, brand_id) values(?, ?,?,null)";
     private final static String SELECT_ALL_BOOKS = "select * from Product";
     private final static String FIND_BY_ID = "select * from Product where id = (?)";
-    private final static String FIND_BY_BRAND = "select * from Product where brand_id = (?)";
+    private final static String FIND_BY_BRAND = "select * from Product inner join Brand on Product.brand_id = Brand.id where Brand.brandName =(?)";
     private final static String FIND_COST_RANGE = "select * from Product where cost < ? and cost > ?";
     private final static String FIND_BRAND_EXIST = "select * from Product where brand_id >0";
     private final static String FIND_MAX_COST = "select * from Product where cost = (select max(cost) from Product)";
@@ -132,10 +132,10 @@ public class ProductDAO extends AbstractDAO<Integer, Product> {
         return result;
     }
 
-    public List<Product> findByBrand(int brand_id) throws SQLException {
+    public List<Product> findByBrand(String brand_name) throws SQLException {
         List<Product> result = new ArrayList<>();
         try (PreparedStatement statement = connection.prepareStatement(FIND_BY_BRAND)) {
-            statement.setInt(1, brand_id);
+            statement.setString(1, brand_name);
             final ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 Product model = new Product();
